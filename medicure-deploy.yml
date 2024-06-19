@@ -37,6 +37,19 @@
         tag: latest
         source: pull
 
+    - name: Get the container ID using port 8081
+      shell: "docker ps --filter 'publish=8081' --format '{{.ID}}'"
+      register: container_id_8081
+
+    - name: Stop the existing container using port 8081
+      shell: "docker stop {{ container_id_8081.stdout }}"
+      when: container_id_8081.stdout != ""
+
+    - name: Remove the existing container using port 8081
+      shell: "docker rm {{ container_id_8081.stdout }}"
+      when: container_id_8081.stdout != ""
+
+
     - name: Run Docker container
       docker_container:
         name: medicure-application
