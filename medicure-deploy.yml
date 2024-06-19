@@ -39,7 +39,7 @@
 
     - name: Run Docker container
       docker_container:
-        name: finance_app
+        name: medicure-application
         image: praveenkumar1131/medicure-application:latest
         state: started
         restart_policy: always
