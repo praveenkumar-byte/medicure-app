@@ -1,0 +1,28 @@
+---
+- name: Start Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add ec2-user to docker group
+  user:
+    name: ec2-user
+    groups: docker
+    append: yes
+
+- name: Pull Docker image
+  docker_image:
+    name: praveenkumar1131/medicure-application
+    tag: latest
+    source: pull
+
+- name: Run Docker container
+  docker_container:
+    name: medicure-application
+    image: praveenkumar1131/medicure-application:latest
+    state: started
+    restart_policy: always
+    ports:
+      - "8083:8081"
+
