@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/*.jar medicure-application.jar
 
 # Expose the port that your Spring Boot application will run on
-EXPOSE 8083
+EXPOSE 8082
 
 # Run the JAR file
 ENTRYPOINT ["java", "-jar", "medicure-application.jar"]
